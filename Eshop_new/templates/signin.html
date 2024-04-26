@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if user %}
+
+<style>
+    .account-page{
+      padding: 50px 0;
+      background: radial-gradient(#fff, #ffd6d6);
+    }
+
+   .message-container{
+      background: #fff;
+      width: 300px;
+      height: 300px;
+      position: relative;
+      text-align: center;
+      padding: 30px 20px 40px 50px;
+      margin: auto;
+     box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
+     overflow: hidden;
+
+  }
+   .form-container{
+    background: #fff;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    text-align: center;
+    padding: 30px 20px 40px 50px;
+    margin: auto;
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+  }
+    form input{
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid orange;
+}
+
+    .error{
+    color:red;}
+    .row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+</style>
+<div class="account-page">
+ <div class="container">
+            <div class="row">
+                <div class="col-2">
+
+                    {% if messages %}
+                    <div class="message-container">
+                        {% for message in messages %}
+                         <li class="{{ message.tags }}"> {{ message }}</li>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+
+        <div class="form-container">
+              <h3 style="color:green;">Login</h3>
+                        <form id="LoginForm" method="post"  enctype="multipart/form-data" style="color:blue,margin-left:20px;">
+                            {% csrf_token %}
+                            <input type="text" name="username" maxlength="10" minlength="4" placeholder="Username" required>
+
+                            <input type="password" name="password1" minlength="6" placeholder="Password" required>
+                            <button type="submit" class="btn" name="login" style="color:green;">Login</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+ </div>
+</div>
+
+{% endif %}
+{% endblock content %}
